@@ -10,6 +10,8 @@ import UIKit
 class RegistrationController: UIViewController {
     
     //MARK: - Properties
+    private let imagePicker = UIImagePickerController()
+    
     private let plusPhotoButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(UIImage(named: "plus_photo"), for: .normal)
@@ -89,7 +91,7 @@ class RegistrationController: UIViewController {
     }
     
     @objc func handleAddProfilePhoto(){
-        print("handleAddProfilePhoto")
+        self.present(imagePicker, animated: true)
     }
     
     @objc func handleRegistration(){
@@ -98,6 +100,7 @@ class RegistrationController: UIViewController {
     
     //MARK: - Helpers
     private func configureUI(){
+        setImagePicker()
         view.backgroundColor = .twitterBlue
         view.addSubview(plusPhotoButton)
         plusPhotoButton.centerX(inView: view, topAnchor: view.safeAreaLayoutGuide.topAnchor)
@@ -119,5 +122,22 @@ class RegistrationController: UIViewController {
         view.addSubview(alreadyHaveAccountButton)
         alreadyHaveAccountButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 40, paddingRight: 40)
     }
+    
+    private func setImagePicker(){
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+    }
 }
 
+//MARK: - UIImagePickerControllerDelegate
+
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let profileImage = info[.editedImage] as? UIImage else { return }
+        self.plusPhotoButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.plusPhotoButton.styleRound(withCornerRadius: 128)
+        
+        self.dismiss(animated: true)
+    }
+}

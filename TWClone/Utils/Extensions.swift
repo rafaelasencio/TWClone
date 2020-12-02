@@ -94,3 +94,14 @@ extension UIColor {
     
     static let twitterBlue = UIColor.rgb(red: 29, green: 161, blue: 242)
 }
+
+extension UIButton {
+    func styleRound(withCornerRadius radius: CGFloat){
+        self.layer.cornerRadius = radius / 2
+        self.layer.masksToBounds = true
+        self.imageView?.contentMode = .scaleAspectFill
+        self.imageView?.clipsToBounds = true
+        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderWidth = 2
+    }
+}
