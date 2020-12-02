@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D211B857F63F90971D30C4D /* Pods_TWClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3C0156A09E8C8A58312FA84 /* Pods_TWClone.framework */; };
+		8465E123257813080080E599 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8465E122257813080080E599 /* GoogleService-Info.plist */; };
 		84E5579F2574F9B50075135D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5579E2574F9B50075135D /* AppDelegate.swift */; };
 		84E557A12574F9B50075135D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E557A02574F9B50075135D /* SceneDelegate.swift */; };
 		84E557A62574F9B50075135D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E557A42574F9B50075135D /* Main.storyboard */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		037F745520FB01187FBAFD24 /* Pods-TWClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TWClone.debug.xcconfig"; path = "Target Support Files/Pods-TWClone/Pods-TWClone.debug.xcconfig"; sourceTree = "<group>"; };
+		8465E122257813080080E599 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		84E5579B2574F9B50075135D /* TWClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TWClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E5579E2574F9B50075135D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84E557A02574F9B50075135D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +44,8 @@
 		84E557D125757FB00075135D /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		84E557D6257580340075135D /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		84E557D9257586AE0075135D /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		B3C0156A09E8C8A58312FA84 /* Pods_TWClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TWClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED43B91C89DAD7541A182742 /* Pods-TWClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TWClone.release.xcconfig"; path = "Target Support Files/Pods-TWClone/Pods-TWClone.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,17 +53,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D211B857F63F90971D30C4D /* Pods_TWClone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		298217059EABB7CF3C0D35C5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				037F745520FB01187FBAFD24 /* Pods-TWClone.debug.xcconfig */,
+				ED43B91C89DAD7541A182742 /* Pods-TWClone.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		2E898C01D851A345853D1156 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B3C0156A09E8C8A58312FA84 /* Pods_TWClone.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		84E557922574F9B50075135D = {
 			isa = PBXGroup;
 			children = (
 				84E5579D2574F9B50075135D /* TWClone */,
 				84E5579C2574F9B50075135D /* Products */,
+				298217059EABB7CF3C0D35C5 /* Pods */,
+				2E898C01D851A345853D1156 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,6 +110,7 @@
 				84E557A72574F9B80075135D /* Assets.xcassets */,
 				84E557A92574F9B80075135D /* LaunchScreen.storyboard */,
 				84E557AC2574F9B80075135D /* Info.plist */,
+				8465E122257813080080E599 /* GoogleService-Info.plist */,
 			);
 			path = TWClone;
 			sourceTree = "<group>";
@@ -146,9 +174,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84E557AF2574F9B80075135D /* Build configuration list for PBXNativeTarget "TWClone" */;
 			buildPhases = (
+				BF1EDEF79ED5197279C17315 /* [CP] Check Pods Manifest.lock */,
 				84E557972574F9B50075135D /* Sources */,
 				84E557982574F9B50075135D /* Frameworks */,
 				84E557992574F9B50075135D /* Resources */,
+				796F0DEEC3BEF64CCC9C8E41 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -197,12 +227,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				84E557AB2574F9B80075135D /* LaunchScreen.storyboard in Resources */,
+				8465E123257813080080E599 /* GoogleService-Info.plist in Resources */,
 				84E557A82574F9B80075135D /* Assets.xcassets in Resources */,
 				84E557A62574F9B50075135D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		796F0DEEC3BEF64CCC9C8E41 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TWClone/Pods-TWClone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TWClone/Pods-TWClone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TWClone/Pods-TWClone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF1EDEF79ED5197279C17315 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TWClone-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		84E557972574F9B50075135D /* Sources */ = {
@@ -363,6 +436,7 @@
 		};
 		84E557B02574F9B80075135D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 037F745520FB01187FBAFD24 /* Pods-TWClone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -382,6 +456,7 @@
 		};
 		84E557B12574F9B80075135D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ED43B91C89DAD7541A182742 /* Pods-TWClone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
