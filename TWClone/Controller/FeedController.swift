@@ -23,6 +23,7 @@ class FeedController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
+        self.fetchTweets()
     }
     
     //MARK: - Helpers
@@ -44,5 +45,13 @@ class FeedController: UIViewController {
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.sd_setImage(with: user.profileImageURL, completed: nil)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImageView)
+    }
+    
+    //MARK: - API
+    
+    private func fetchTweets(){
+        TweetService.shared.fetchTweets { tweets in
+            print("DEBUG: tweets \(tweets)")
+        }
     }
 }
