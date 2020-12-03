@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Firebase
 
 class RegistrationController: UIViewController {
     
     //MARK: - Properties
     private let imagePicker = UIImagePickerController()
+    private var profileImage: UIImage?
     
     private let plusPhotoButton: UIButton = {
         let btn = UIButton(type: .system)
@@ -95,7 +97,21 @@ class RegistrationController: UIViewController {
     }
     
     @objc func handleRegistration(){
-        print("handleRegistration")
+        guard let profileImage = profileImage else { return }
+        guard let email = emailTextfield.text, !email.isEmpty else { return }
+        guard let password = passwordTextfield.text, !password.isEmpty else { return }
+        guard let fullname = fullnameTextfield.text, !fullname.isEmpty else { return }
+        guard let username = usernameTextfield.text, !username.isEmpty else { return }
+        
+        let authCredentials = AuthCredentials(profileImage: profileImage, email: email, password: password,
+                                              fullname: fullname, username: username)
+        AuthService.shared.registerUser(authCredentials) { error, ref in
+            if let error = error {
+                print("DEBUB: error "+error.localizedDescription)
+                return
+            }
+            print("DEBUG: successfully updated user information")
+        }
     }
     
     //MARK: - Helpers
@@ -135,6 +151,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let profileImage = info[.editedImage] as? UIImage else { return }
+        self.profileImage = profileImage
         self.plusPhotoButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
         self.plusPhotoButton.styleRound(withCornerRadius: 128)
         
