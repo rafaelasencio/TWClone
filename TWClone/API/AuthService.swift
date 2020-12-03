@@ -20,6 +20,10 @@ class AuthService {
     
     static let shared = AuthService()
     
+    func logUserIn(withEmail email: String, password: String, completion: @escaping AuthDataResultCallback){
+        Auth.auth().signIn(withEmail: email, password: password, completion: completion)
+    }
+    
     func registerUser(_ user: AuthCredentials, completion: @escaping(Error?, DatabaseReference)->()){
         //Create user
         Auth.auth().createUser(withEmail: user.email, password: user.password) { (result, error) in
@@ -52,6 +56,15 @@ class AuthService {
                 }
             }
             print("DEBUG: user created")
+        }
+    }
+    
+    func logout(){
+        do {
+            try Auth.auth().signOut()
+            print("DEBUG: user log out")
+        } catch let error {
+            print("DEBUG: error "+error.localizedDescription)
         }
     }
 }

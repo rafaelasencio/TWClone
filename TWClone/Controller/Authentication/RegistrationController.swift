@@ -110,6 +110,10 @@ class RegistrationController: UIViewController {
                 print("DEBUB: error "+error.localizedDescription)
                 return
             }
+            guard let window = UIApplication.shared.windows.first(where: {$0.isKeyWindow}) else { return }
+            guard let tabController = window.rootViewController as? MainTabController else { return }
+            tabController.authenticateUserAndConfigureUI()
+            self.dismiss(animated: true, completion: nil)
             print("DEBUG: successfully updated user information")
         }
     }

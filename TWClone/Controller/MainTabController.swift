@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MainTabController: UITabBarController {
 
@@ -24,9 +25,29 @@ class MainTabController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
-        self.configureVCs()
-        self.configureUI()
+        self.view.backgroundColor = .twitterBlue
+//        self.logout()
+        self.authenticateUserAndConfigureUI()
+    }
+    
+    //MARK: - API
+    func authenticateUserAndConfigureUI(){
+        if Auth.auth().currentUser?.uid == nil {
+            DispatchQueue.main.async {
+                let nav = UINavigationController(rootViewController: LoginController())
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
+            }
+            print("DEBUG: user not logged in")
+        }else{
+            self.configureVCs()
+            self.configureUI()
+            print("DEBUG: user is logged in")
+        }
+    }
+    
+    private func logout(){
+        AuthService.shared.logout()
     }
     
     //MARK: - Selectors
@@ -37,7 +58,7 @@ class MainTabController: UITabBarController {
     //MARK: - Helpers
     
     private func configureUI(){
-        view.addSubview(actionButton)
+        self.view.addSubview(actionButton)
         actionButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor,
                             paddingBottom: 64, paddingRight: 16, width: 56, height: 56)
     }
@@ -52,7 +73,7 @@ class MainTabController: UITabBarController {
         let nav3 = templateNavigationController(imageName: "like_unselected", rootVC: notifications)
         let nav4 = templateNavigationController(imageName: "ic_mail_outline_white_2x-1", rootVC: conversations)
         
-        viewControllers = [nav1, nav2, nav3, nav4]
+        self.viewControllers = [nav1, nav2, nav3, nav4]
     }
     
     private func templateNavigationController(imageName: String, rootVC: UIViewController)->UINavigationController{

@@ -110,6 +110,7 @@
 				84E5579E2574F9B50075135D /* AppDelegate.swift */,
 				84E557A02574F9B50075135D /* SceneDelegate.swift */,
 				84E557A42574F9B50075135D /* Main.storyboard */,
+				84E557C82575124A0075135D /* ConversationsController.swift */,
 				84E557A72574F9B80075135D /* Assets.xcassets */,
 				84E557A92574F9B80075135D /* LaunchScreen.storyboard */,
 				84E557AC2574F9B80075135D /* Info.plist */,
@@ -133,7 +134,6 @@
 				84E557BF257511ED0075135D /* FeedController.swift */,
 				84E557C2257512300075135D /* ExploreController.swift */,
 				84E557C52575123D0075135D /* NotificationController.swift */,
-				84E557C82575124A0075135D /* ConversationsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
