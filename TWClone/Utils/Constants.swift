@@ -12,7 +12,8 @@ import Firebase
 
 let DB_REF = Database.database().reference()
 let USER_REF = DB_REF.child("users")
-
+let TWEETS_REF = DB_REF.child("tweets")
+    
 //MARK: - STORAGE
 
 let STORAGE_REF = Storage.storage().reference()
