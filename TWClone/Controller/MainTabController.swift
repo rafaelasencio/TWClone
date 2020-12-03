@@ -42,12 +42,17 @@ class MainTabController: UITabBarController {
         }else{
             self.configureVCs()
             self.configureUI()
+            self.fetchUser()
             print("DEBUG: user is logged in")
         }
     }
     
     private func logout(){
         AuthService.shared.logout()
+    }
+    
+    private func fetchUser(){
+        UserService.shared.fetchUser()
     }
     
     //MARK: - Selectors
