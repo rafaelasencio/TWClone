@@ -11,6 +11,15 @@ import Firebase
 class MainTabController: UITabBarController {
 
     //MARK: - Properties
+    var user: User? {
+        didSet {
+            print("DEBUG: user did set ")
+            guard let nav = viewControllers?[0] as? UINavigationController else { return }
+            guard let feed = nav.viewControllers.first as? FeedController else { return }
+            feed.user = self.user
+        }
+    }
+    
     let actionButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.tintColor = .white
@@ -52,7 +61,9 @@ class MainTabController: UITabBarController {
     }
     
     private func fetchUser(){
-        UserService.shared.fetchUser()
+        UserService.shared.fetchUser { user in
+            self.user = user
+        }
     }
     
     //MARK: - Selectors

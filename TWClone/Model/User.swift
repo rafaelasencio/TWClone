@@ -9,16 +9,21 @@ import UIKit
 
 struct User {
     let uid: String
-    let profileImage: String
+    var profileImageURL: URL?
     let email: String
     let fullname: String
     let username: String
     
     init(uid: String, dictionary: [String: AnyObject]) {
         self.uid = uid
-        self.profileImage = dictionary["profileImageUrl"] as? String ?? ""
         self.email = dictionary["email"] as? String ?? ""
         self.fullname = dictionary["fullname"] as? String ?? ""
         self.username = dictionary["username"] as? String ?? ""
+        
+        if let profileImageURL = dictionary["profileImageUrl"] as? String {
+            guard let url =  URL(string: profileImageURL) else { return }
+            self.profileImageURL = url
+        }
+        
     }
 }
