@@ -25,13 +25,18 @@ class TweetService {
     }
     
     func fetchTweets(completion:@escaping([Tweet])->()){
+        var tweets = [Tweet]()
+        
         TWEETS_REF.observe(.childAdded) { snapshot in
-            var tweets = [Tweet]()
             guard let dictionary = snapshot.value as? [String: Any] else { return }
+            guard let uid = dictionary["uid"] as? String else { return }
             let tweetId = snapshot.key
-            let tweet = Tweet(tweetId: tweetId, dictionary: dictionary)
-            tweets.append(tweet)
-            completion(tweets)
+            
+            UserService.shared.fetchUser(withUID: uid) { user in
+                let tweet = Tweet(user: user, tweetId: tweetId, dictionary: dictionary)
+                tweets.append(tweet)
+                completion(tweets)
+            }
         }
     }
 }
