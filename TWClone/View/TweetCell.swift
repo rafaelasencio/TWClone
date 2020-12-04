@@ -132,8 +132,11 @@ class TweetCell: UICollectionViewCell {
     
     private func configure(){
         guard let tweet = self.tweet else { return }
+        let viewModel = TweetViewModel(tweet: tweet)
+        
         self.captionLabel.text = tweet.caption
-        self.infoLabel.text = tweet.user.username
-        self.profileImageView.sd_setImage(with: tweet.user.profileImageURL, completed: nil)
+        self.infoLabel.attributedText = viewModel.userInfoText
+        self.profileImageView.sd_setImage(with: viewModel.profileImageUrl, completed: nil)
+        print("\(viewModel.timeStamp)")
     }
 }
