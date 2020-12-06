@@ -37,7 +37,7 @@ class ProfileHeader: UICollectionReusableView {
     
     private var profileImageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray
         iv.layer.borderColor = UIColor.white.cgColor
@@ -172,6 +172,8 @@ class ProfileHeader: UICollectionReusableView {
         let viewModel = ProfileHeaderViewModel(user: user)
         self.followingLabel.attributedText = viewModel.followingString
         self.followersLabel.attributedText = viewModel.followersString
+        self.profileImageView.sd_setImage(with: user.profileImageURL, completed: nil)
+        self.editProfileFollowButton.setTitle(viewModel.actionButtonTitle, for: .normal)
     }
 }
 

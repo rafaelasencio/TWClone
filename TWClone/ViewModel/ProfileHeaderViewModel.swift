@@ -34,6 +34,10 @@ struct ProfileHeaderViewModel {
         return self.attributedText(withValue: 2, text: "following")
     }
     
+    var actionButtonTitle: String {
+        self.user.isCurrentUser ? "Edit Profile" : "Follow"
+    }
+    
     //MARK: - Init
     init(user: User) {
         self.user = user
