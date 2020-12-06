@@ -34,6 +34,8 @@ class ProfileFilterView: UIView {
         collectionView.register(ProfileFilterCell.self, forCellWithReuseIdentifier: identifier)
         addSubview(collectionView)
         collectionView.addConstraintsToFillView(self)
+        let selectedIndexPath = IndexPath(row: 0, section: 0)
+        collectionView.selectItem(at: selectedIndexPath, animated: true, scrollPosition: .left)
     }
     
     required init?(coder: NSCoder) {
@@ -45,11 +47,13 @@ class ProfileFilterView: UIView {
 extension ProfileFilterView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return ProfileFilterOptions.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ProfileFilterCell
+        let option = ProfileFilterOptions(rawValue: indexPath.row)
+        cell.option = option
         return cell
     }
     
@@ -65,7 +69,8 @@ extension ProfileFilterView: UICollectionViewDelegate {
 //MARK: - UICollectionViewDelegateFlowLayout
 extension ProfileFilterView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width / 3, height: frame.height)
+        let options = CGFloat(ProfileFilterOptions.allCases.count)
+        return CGSize(width: frame.width / options, height: frame.height)
     }
     
     //Define spacing between elements in collectionView on ProfileFilterView
