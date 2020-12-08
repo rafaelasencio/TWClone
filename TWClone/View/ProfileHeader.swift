@@ -64,15 +64,13 @@ class ProfileHeader: UICollectionReusableView {
     
     private let fullnameLabel: UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 20)
-        lbl.text = "Elon Musk"
+        lbl.font = UIFont.boldSystemFont(ofSize: 20)
         return lbl
     }()
     
     private let usernameLabel: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 16)
-        lbl.text = "@elon"
         lbl.textColor = .lightGray
         return lbl
     }()
@@ -180,6 +178,8 @@ class ProfileHeader: UICollectionReusableView {
         self.followersLabel.attributedText = viewModel.followersString
         self.profileImageView.sd_setImage(with: user.profileImageURL, completed: nil)
         self.editProfileFollowButton.setTitle(viewModel.actionButtonTitle, for: .normal)
+        fullnameLabel.text = user.fullname
+        usernameLabel.text = viewModel.usernameText
     }
 }
 
