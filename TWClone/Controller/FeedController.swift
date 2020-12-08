@@ -34,6 +34,12 @@ class FeedController: UICollectionViewController {
         self.fetchTweets()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     //MARK: - Helpers
     private func configureUI(){
         view.backgroundColor = .white
