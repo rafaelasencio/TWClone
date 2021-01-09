@@ -100,7 +100,7 @@ class MainTabController: UITabBarController {
     private func templateNavigationController(imageName: String, rootVC: UIViewController)->UINavigationController{
         let nav = UINavigationController(rootViewController: rootVC)
         nav.tabBarItem.image = UIImage(named: imageName)
-        nav.navigationBar.tintColor = .white
+        nav.navigationBar.tintColor = .twitterBlue
         return nav
     }
 
