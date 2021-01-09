@@ -12,7 +12,7 @@ private let headerIdentifier = "ProfileHeader"
 class ProfileController: UICollectionViewController {
     
     //MARK: - Properties
-    private let user: User
+    private var user: User
     
     private var tweets = [Tweet]() {
         didSet {
@@ -34,6 +34,8 @@ class ProfileController: UICollectionViewController {
         super.viewDidLoad()
         self.configureCollectionView()
         self.fetchTweets()
+        self.checkIfUserIsFollowed()
+        self.fetchUserStats()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +59,21 @@ class ProfileController: UICollectionViewController {
         TweetService.shared.fetchTweets(forUser: self.user) { tweets in
             guard let tweets = tweets else { return }
             self.tweets = tweets
+        }
+    }
+    
+    private func checkIfUserIsFollowed(){
+        UserService.shared.checkIfUserIsFollowed(uid: user.uid) { (isFollowed) in
+            print("DEBUG: \(isFollowed)")
+            self.user.isFollowed = isFollowed
+            self.collectionView.reloadData()
+        }
+    }
+    
+    private func fetchUserStats(){
+        UserService.shared.fetchUserStats(uid: user.uid) { (stats) in
+            self.user.stats = stats
+            self.collectionView.reloadData()
         }
     }
 }
@@ -104,6 +121,25 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
 
 //MARK: - ProfileHeaderProtocol
 extension ProfileController: ProfileHeaderProtocol {
+    
+    func handleEditProfileFollow(_ header: ProfileHeader) {
+        let isFollowed = self.user.isFollowed
+        if !user.isCurrentUser {
+            if isFollowed {
+                UserService.shared.unfollowUser(uid: user.uid) { (error, ref) in
+                    self.user.isFollowed = false
+                    self.collectionView.reloadData()
+                }
+            }else{
+                UserService.shared.followUser(uid: user.uid) { (error, ref) in
+                    self.user.isFollowed = true
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+        
+    }
+    
     
     func handleDismissal() {
         self.navigationController?.popViewController(animated: true)
