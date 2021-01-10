@@ -12,7 +12,7 @@ class TweetService {
     
     static let shared = TweetService()
     
-    func uploadTweet(caption: String, type: UploadTweetConfiguration, completion: @escaping(Error?, DatabaseReference)->()){
+    func uploadTweet(caption: String, type: UploadTweetConfiguration, completion: @escaping(DatabaseCompletion)){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let timestamp = NSDate().timeIntervalSince1970
         let values = ["uid":uid,
@@ -61,6 +61,22 @@ class TweetService {
                     tweets.append(tweet)
                     completion(tweets)
                 }
+            }
+        }
+    }
+    
+    func fetchReplies(forTweet tweet: Tweet, completion:@escaping([Tweet])->()){
+        var tweets = [Tweet]()
+        TWEET_REPLIES_REF.child(tweet.tweetId).observe(.childAdded) { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+            guard let uid = dictionary["uid"] as? String else { return }
+            let tweetId = snapshot.key
+            print("DEBUG: tweetId \(tweet.tweetId)")
+            print("DEBUG: snapshot.key \(snapshot.key)")
+            UserService.shared.fetchUser(withUID: uid) { user in
+                let tweet = Tweet(user: user, tweetId: tweetId, dictionary: dictionary)
+                tweets.append(tweet)
+                completion(tweets)
             }
         }
     }

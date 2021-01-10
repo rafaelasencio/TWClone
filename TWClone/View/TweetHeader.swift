@@ -123,7 +123,6 @@ class TweetHeader: UICollectionReusableView {
     //MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         let labelStack = UIStackView(arrangedSubviews: [fullnameLabel, usernameLabel])
         labelStack.axis = .vertical
         labelStack.spacing = -6
@@ -144,14 +143,15 @@ class TweetHeader: UICollectionReusableView {
         optionButton.anchor(right: rightAnchor, paddingRight: 8)
         
         addSubview(statsView)
-        statsView.anchor(top: dateLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 12, height: 40)
+        statsView.anchor(top: dateLabel.bottomAnchor, left: leftAnchor, right: rightAnchor,
+                         paddingTop: 12, height: 40)
         
         let actionStack = UIStackView(arrangedSubviews: [commentButton, retweetButton, likeButton, shareButton])
         actionStack.spacing = 72
 
         addSubview(actionStack)
         actionStack.centerX(inView: self)
-        actionStack.anchor(bottom: bottomAnchor, paddingBottom: 12)
+        actionStack.anchor(top: statsView.bottomAnchor, paddingTop: 16)
     }
     
     required init?(coder: NSCoder) {
