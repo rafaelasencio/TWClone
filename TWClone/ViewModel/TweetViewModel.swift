@@ -66,4 +66,14 @@ struct TweetViewModel {
                                                                                   .foregroundColor: UIColor.lightGray]))
         return attributedTitle
     }
+    
+    func size(forWidth width: CGFloat)-> CGSize {
+        let sizeLabel = UILabel()
+        sizeLabel.text = tweet.caption
+        sizeLabel.numberOfLines = 0
+        sizeLabel.lineBreakMode = .byWordWrapping
+        sizeLabel.translatesAutoresizingMaskIntoConstraints = false
+        sizeLabel.widthAnchor.constraint(equalToConstant: width).isActive = true
+        return sizeLabel.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+    }
 }
