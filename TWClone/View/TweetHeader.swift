@@ -10,6 +10,10 @@ import UIKit
 class TweetHeader: UICollectionReusableView {
     
     //MARK: - Properties
+    var tweet: Tweet? {
+        didSet { configure() }
+    }
+    
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -64,21 +68,12 @@ class TweetHeader: UICollectionReusableView {
         return btn
     }()
     
-    private let retweetsLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.text = "2 Retweets"
-        return lbl
-    }()
+    private let retweetsLabel = UILabel()
     
-    private let likesLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.text = "0 Likes"
-        return lbl
-    }()
+    private let likesLabel = UILabel()
     
     private lazy var statsView: UIView = {
         let v = UIView()
-//        v.backgroundColor = .red
         
         let divider1 = UIView()
         divider1.backgroundColor = .systemGroupedBackground
@@ -189,11 +184,23 @@ class TweetHeader: UICollectionReusableView {
     }
     
     //MARK: - Helpers
-    func createButton(withImageName imageName: String)-> UIButton{
+    private func createButton(withImageName imageName: String)-> UIButton{
         let btn = UIButton(type: .system)
         btn.setImage(UIImage(named: imageName), for: .normal)
         btn.tintColor = .darkGray
         btn.setDimensions(width: 20, height: 20)
         return btn
+    }
+    
+    private func configure(){
+        guard let tweet = self.tweet else { return }
+        let viewModel = TweetViewModel(tweet: tweet)
+        captionLabel.text = tweet.caption
+        fullnameLabel.text = tweet.user.fullname
+        usernameLabel.text = viewModel.usernameText
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl, completed: nil)
+        dateLabel.text = viewModel.headerTimeStamp
+        retweetsLabel.attributedText = viewModel.retweetAttributedString
+        likesLabel.attributedText = viewModel.likesAttributedString
     }
 }
