@@ -12,7 +12,7 @@ class TweetService {
     
     static let shared = TweetService()
     
-    func uploadTweet(caption: String, completion: @escaping(Error?, DatabaseReference)->()){
+    func uploadTweet(caption: String, type: UploadTweetConfiguration, completion: @escaping(Error?, DatabaseReference)->()){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let timestamp = NSDate().timeIntervalSince1970
         let values = ["uid":uid,
@@ -20,12 +20,15 @@ class TweetService {
                       "likes":0,
                       "retweets":0,
                       "caption":caption] as [String: AnyObject]
-        let ref = TWEETS_REF.childByAutoId()
-        //childByAutoId generate a uuid
-//        TWEETS_REF.childByAutoId().updateChildValues(values, withCompletionBlock: completion)
-        ref.updateChildValues(values) { (error, ref) in
-            guard let tweetID = ref.key else { return }
-            USER_TWEETS_REF.child(uid).updateChildValues([tweetID: 1], withCompletionBlock: completion)
+        switch type {
+        case .tweet:
+            TWEETS_REF.childByAutoId().updateChildValues(values) { (error, ref) in
+                //update user_tweet structure after tweet upload completes
+                guard let tweetID = ref.key else { return }
+                USER_TWEETS_REF.child(uid).updateChildValues([tweetID: 1], withCompletionBlock: completion)
+            }
+        case .reply(let tweet):
+            TWEET_REPLIES_REF.child(tweet.tweetId).childByAutoId().updateChildValues(values, withCompletionBlock: completion)
         }
     }
     

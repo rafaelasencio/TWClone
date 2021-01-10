@@ -16,6 +16,7 @@ let TWEETS_REF = DB_REF.child("tweets")
 let USER_TWEETS_REF = DB_REF.child("user_tweets")
 let USER_FOLLOWERS_REF = DB_REF.child("user_followers")
 let USER_FOLLOWING_REF = DB_REF.child("user_following")
+let TWEET_REPLIES_REF = DB_REF.child("tweet_replies")
 
 //MARK: - STORAGE
 
