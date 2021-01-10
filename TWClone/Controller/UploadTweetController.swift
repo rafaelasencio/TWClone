@@ -11,11 +11,13 @@ class UploadTweetController: UIViewController {
     
     //MARK: - Properties
     private let user: User
+    private let config: UploadTweetConfiguration
+    private lazy var viewModel = UploadTweetViewModel(config: config)
     
     private lazy var actionButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = .twitterBlue
-        btn.setTitle("Tweet", for: .normal)
+        btn.setTitle(viewModel.actionButtonTitle, for: .normal)
         btn.titleLabel?.textAlignment = .center
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         btn.setTitleColor(.white, for: .normal)
@@ -39,8 +41,9 @@ class UploadTweetController: UIViewController {
     
     //MARK: - Lifecycle
     
-    init(user: User) {
+    init(user: User, config: UploadTweetConfiguration) {
         self.user = user
+        self.config = config
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -51,6 +54,12 @@ class UploadTweetController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        switch config {
+        case .tweet:
+            print("DEBUG: is tweet")
+        case .reply(let tweet):
+            print("DEBUG: is replying \(tweet.user.username)")
+        }
     }
     
     //MARK: - Selectors
